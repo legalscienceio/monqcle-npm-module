@@ -16,6 +16,13 @@
     "url": "https://github.com/legalscienceio/monqcle-npm-module/issues"
   },
   "homepage": "https://github.com/legalscienceio/monqcle-npm-module#readme",
+  "dependencies": {
+    "async": "*",
+    "lodash": "*",
+    "request": "*",
+    "request-json": "*",
+    "underscore": "*"
+  },
   "devDependencies": {
     "chai": "^3.5.0",
     "mocha": "^3.4.1"

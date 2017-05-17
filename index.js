@@ -3,7 +3,6 @@ var site_id = "";
 request = require('request-json');
 var _ = require('lodash');
 var client = request.createClient(api_host);
-var _ = require('lodash');
 var async = require("async");
 
 module.exports = {
@@ -11,20 +10,32 @@ module.exports = {
   /**
   * Escape special characters in the given string of html.
   *
-  * @param  {Request} req
-  * @param  {Response} res
+  * @param  {String} name
+  * @param  {String} display
   * @return {String}
   */
-  dataset: function(name, display) {
-      
-      if(display){
-          url = api_host + 'siteitem/' + dataset_slug + '/get_by_dataset?site=' + site_id + '&display=' + display;
+  dataset: function(name, display) {      
+      var asyncTasks = [];
+      if(display && display != ''){
+          url = 'siteitem/' + dataset_slug + '/get_by_dataset?site=' + site_id + '&display=' + display;
       } else {
-          url = api_host + 'siteitem/' + dataset_slug + '/get_by_dataset?site=' + site_id;		
+          url = 'siteitem/' + dataset_slug + '/get_by_dataset?site=' + site_id;		
       }
+      console.log(url);
+      //get questions_editor
+      asyncTasks.push(function (callback) {
+        client.get(url, function (err, res, body) {
+            callback(body, null);
+        });
+      });
+      async.parallel(asyncTasks, function (siteItem) {
+        //res.send(siteItem);
+        console.log(siteItem);
+        return siteItem;
+      });
       
-      html = "<p>Dataset</p>";
-      return String(html);
+      //html = "<p>Dataset</p>";
+      //return String(html);
   },
     
   /**

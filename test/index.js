@@ -6,7 +6,8 @@ var should = require('chai').should(),
 
 describe('#dataset', function() {
   it('prints dataset info', function() {
-    dataset({},{}).should.equal('<p>Dataset</p>');
+      //dataset("biosimilars-laws","").should.equal('<p>Dataset</p>');
+      expect(dataset("biosimilars-laws","")).to.have.all.keys(['id', 'previews']);
   });
 });
 
