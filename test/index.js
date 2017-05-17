@@ -1,7 +1,14 @@
 var should = require('chai').should(),
     monqcle_api = require('../index'),
     escape = monqcle_api.escape,
-    unescape = monqcle_api.unescape;
+    unescape = monqcle_api.unescape,
+    dataset = monqcle_api.dataset;
+
+describe('#dataset', function() {
+  it('prints dataset info', function() {
+    dataset({},{}).should.equal('<p>Dataset</p>');
+  });
+});
 
 describe('#escape', function() {
   it('converts & into &amp;', function() {
