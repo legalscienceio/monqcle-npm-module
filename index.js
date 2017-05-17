@@ -1,5 +1,5 @@
 var api_host = "http://test.monqcle.com/";
-var site_id = "";
+var site_id = "56e805b9d6c9e75c1ac8cb12";
 request = require('request-json');
 var _ = require('lodash');
 var client = request.createClient(api_host);
@@ -17,9 +17,9 @@ module.exports = {
   dataset: function(name, display) {      
       var asyncTasks = [];
       if(display && display != ''){
-          url = 'siteitem/' + dataset_slug + '/get_by_dataset?site=' + site_id + '&display=' + display;
+          url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id + '&display=' + display;
       } else {
-          url = 'siteitem/' + dataset_slug + '/get_by_dataset?site=' + site_id;		
+          url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id;		
       }
       console.log(url);
       //get questions_editor
@@ -63,7 +63,6 @@ module.exports = {
     return String(html)
       .replace(/&amp;/g, '&')
       .replace(/&quot;/g, '"')
-      .replace(/&#39;/g, ''')
       .replace(/&lt;/g, '<')
       .replace(/&gt;/g, '>');
   }

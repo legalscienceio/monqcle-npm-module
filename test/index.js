@@ -1,4 +1,5 @@
 var should = require('chai').should(),
+    expect = require('chai').expect,
     monqcle_api = require('../index'),
     escape = monqcle_api.escape,
     unescape = monqcle_api.unescape,
@@ -7,7 +8,12 @@ var should = require('chai').should(),
 describe('#dataset', function() {
   it('prints dataset info', function() {
       //dataset("biosimilars-laws","").should.equal('<p>Dataset</p>');
-      expect(dataset("biosimilars-laws","")).to.have.all.keys(['id', 'previews']);
+      dataset_info = dataset("biosimilars-laws","");
+      //console.log(dataset_info);
+      expect(dataset_info).to.not.be.undefined;
+      expect(dataset_info).to.not.be.null;
+
+      expect(dataset_info).to.have.all.keys(['id', 'previews']);
   });
 });
 
@@ -18,10 +24,6 @@ describe('#escape', function() {
 
   it('converts " into &quot;', function() {
     escape('"').should.equal('&quot;');
-  });
-
-  it('converts ' into &#39;', function() {
-    escape(''').should.equal('&#39;');
   });
 
   it('converts < into &lt;', function() {
@@ -40,10 +42,6 @@ describe('#unescape', function() {
 
   it('converts &quot; into "', function() {
     unescape('&quot;').should.equal('"');
-  });
-
-  it('converts &#39; into '', function() {
-    unescape('&#39;').should.equal(''');
   });
 
   it('converts &lt; into <', function() {
