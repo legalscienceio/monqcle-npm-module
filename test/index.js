@@ -27,45 +27,46 @@ describe('#dataset_nodeify', function() {
           //console.log(dataset_info);
           expect(dataset_info).to.not.be.undefined;
           expect(dataset_info).to.not.be.null;
-          //expect(dataset_info).to.have.all.keys(['id', 'previews']);
+          expect(dataset_info).to.have.all.keys(['id', 'previews']);
+          dataset_info['id'].should.equal("56f924f0d6c9e7cf2f422eb4");
       });
       
   });
 });
 
 
-describe('#escape', function() {
-  it('converts & into &amp;', function() {
-    escape('&').should.equal('&amp;');
-  });
-
-  it('converts " into &quot;', function() {
-    escape('"').should.equal('&quot;');
-  });
-
-  it('converts < into &lt;', function() {
-    escape('<').should.equal('&lt;');
-  });
-
-  it('converts > into &gt;', function() {
-    escape('>').should.equal('&gt;');
-  });
-});
-
-describe('#unescape', function() {
-  it('converts &amp; into &', function() {
-    unescape('&amp;').should.equal('&');
-  });
-
-  it('converts &quot; into "', function() {
-    unescape('&quot;').should.equal('"');
-  });
-
-  it('converts &lt; into <', function() {
-    unescape('&lt;').should.equal('<');
-  });
-
-  it('converts &gt; into >', function() {
-    unescape('&gt;').should.equal('>');
-  });
-});
+//describe('#escape', function() {
+//  it('converts & into &amp;', function() {
+//    escape('&').should.equal('&amp;');
+//  });
+//
+//  it('converts " into &quot;', function() {
+//    escape('"').should.equal('&quot;');
+//  });
+//
+//  it('converts < into &lt;', function() {
+//    escape('<').should.equal('&lt;');
+//  });
+//
+//  it('converts > into &gt;', function() {
+//    escape('>').should.equal('&gt;');
+//  });
+//});
+//
+//describe('#unescape', function() {
+//  it('converts &amp; into &', function() {
+//    unescape('&amp;').should.equal('&');
+//  });
+//
+//  it('converts &quot; into "', function() {
+//    unescape('&quot;').should.equal('"');
+//  });
+//
+//  it('converts &lt; into <', function() {
+//    unescape('&lt;').should.equal('<');
+//  });
+//
+//  it('converts &gt; into >', function() {
+//    unescape('&gt;').should.equal('>');
+//  });
+//});
