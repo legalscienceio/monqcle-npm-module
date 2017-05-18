@@ -3,19 +3,36 @@ var should = require('chai').should(),
     monqcle_api = require('../index'),
     escape = monqcle_api.escape,
     unescape = monqcle_api.unescape,
-    dataset = monqcle_api.dataset;
+    dataset = monqcle_api.dataset,
+    dataset_nodeify = monqcle_api.dataset_nodeify;
 
-describe('#dataset', function() {
-  it('prints dataset info', function() {
+//describe('#dataset', function() {
+//  it('prints dataset info', function() {
+//      //dataset("biosimilars-laws","").should.equal('<p>Dataset</p>');
+//      dataset_info = dataset("biosimilars-laws","");
+//      //console.log(dataset_info);
+//      expect(dataset_info).to.not.be.undefined;
+//      expect(dataset_info).to.not.be.null;
+//
+//      expect(dataset_info).to.have.all.keys(['id', 'previews']);
+//  });
+//});
+
+//dataset_nodeify
+describe('#dataset_nodeify', function() {
+  it('prints dataset info using nodeify of promise', function() {
       //dataset("biosimilars-laws","").should.equal('<p>Dataset</p>');
-      dataset_info = dataset("biosimilars-laws","");
-      //console.log(dataset_info);
-      expect(dataset_info).to.not.be.undefined;
-      expect(dataset_info).to.not.be.null;
-
-      expect(dataset_info).to.have.all.keys(['id', 'previews']);
+      dataset_nodeify("biosimilars-laws","", function(dataset_info){
+      
+          //console.log(dataset_info);
+          expect(dataset_info).to.not.be.undefined;
+          expect(dataset_info).to.not.be.null;
+          //expect(dataset_info).to.have.all.keys(['id', 'previews']);
+      });
+      
   });
 });
+
 
 describe('#escape', function() {
   it('converts & into &amp;', function() {

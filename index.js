@@ -1,11 +1,13 @@
 var api_host = "http://test.monqcle.com/";
 var site_id = "56e805b9d6c9e75c1ac8cb12";
-request = require('request-json');
 var _ = require('lodash');
-var client = request.createClient(api_host);
-var async = require("async");
+//request = require('request-json');
+//var client = request.createClient(api_host);
+//var async = require("async");
+var Promise = require('promise');
+ 
 
-module.exports = {
+var exports = module.exports = {
     
   /**
   * Escape special characters in the given string of html.
@@ -14,28 +16,48 @@ module.exports = {
   * @param  {String} display
   * @return {String}
   */
-  dataset: function(name, display) {      
-      var asyncTasks = [];
-      if(display && display != ''){
-          url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id + '&display=' + display;
-      } else {
-          url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id;		
-      }
-      console.log(url);
-      //get questions_editor
-      asyncTasks.push(function (callback) {
-        client.get(url, function (err, res, body) {
-            callback(body, null);
-        });
-      });
-      async.parallel(asyncTasks, function (siteItem) {
-        //res.send(siteItem);
-        console.log(siteItem);
-        return siteItem;
-      });
+  dataset_nodeify: function (name, display, callback) {
+      return exports.dataset(name, display)
+        //.then(exports.parseResult)
+        //.then(null, this.retryErrors)
+        .nodeify(callback)
+  },
+  parseResult: function(result) {
+      //console.log(result);
+      return result;
+  },
+  retryErrors: function(errors) {
+      console.error(errors);
       
-      //html = "<p>Dataset</p>";
-      //return String(html);
+  },    
+    
+  dataset: function(name, display) {      
+     if(display && display != ''){
+          url = api_host + 'siteitem/' + name + '/get_by_dataset?site=' + site_id + '&display=' + display;
+     } else {
+          url = api_host + 'siteitem/' + name + '/get_by_dataset?site=' + site_id;		
+     }
+     
+     var promise = new Promise(function (resolve, reject) {
+      get(api_host, function (err, res) {
+        if (err) reject(err);
+        else resolve(res);
+      });
+    });
+    
+    return promise;
+    //promise.then(this.onFulfilled, this.onRejected);
+      
+  },
+  onFulfilled: function(result) {
+      //console.log("Promise resolved");
+      //console.log(result);
+      return result;
+  },
+  onRejected: function(result) {
+      console.error("Promise rejected");
+      console.error(result);
+      return null;
   },
     
   /**
@@ -67,3 +89,33 @@ module.exports = {
       .replace(/&gt;/g, '>');
   }
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+///NOtes and crap
+
+
+      //get questions_editor
+//      asyncTasks.push(function (callback) {
+//        client.get(url, function (err, res, body) {
+//            callback(body, null);
+//        });
+//      });
+//      async.parallel(asyncTasks, function (siteItem) {
+//        //res.send(siteItem);
+//        console.log(siteItem);
+//        return siteItem;
+//      });
+//      
+      //html = "<p>Dataset</p>";
+      //return String(html);
