@@ -18,7 +18,28 @@ var exports = module.exports = {
           //console.log(d);
           return d;
         });
-  },    
+  },
+  dataset_siteitem: function(name, display, callback) {      
+     if(display && display != ''){
+          url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id + '&display=' + display;
+     } else {
+          url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id;		
+     }
+     
+     var promise = new Promise(function (resolve, reject) {
+      client.get(url, function (err, res) {
+        if (err) reject(err);
+        else resolve(res);
+      });
+    });
+    
+    if(typeof callback != 'undefined'){
+        return Promise.resolve(promise)
+        .nodeify(callback);
+    } else {
+        return Promise.resolve(promise);
+    }
+  },
   /**
   * Escape special characters in the given string of html.
   *
@@ -57,6 +78,17 @@ var exports = module.exports = {
     
     return Promise.resolve(promise);
     //promise.then(this.onFulfilled, this.onRejected);
+      
+  },
+    
+  get_promise: function(url, name, display) {      
+     var promise = new Promise(function (resolve, reject) {
+      client.get(url, function (err, res) {
+        if (err) reject(err);
+        else resolve(res);
+      });
+    });
+    return Promise.resolve(promise);
       
   },
   onFulfilled: function(result) {
