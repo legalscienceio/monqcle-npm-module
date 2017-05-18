@@ -1,14 +1,24 @@
 var api_host = "http://test.monqcle.com/";
 var site_id = "56e805b9d6c9e75c1ac8cb12";
 var _ = require('lodash');
-//request = require('request-json');
-//var client = request.createClient(api_host);
+request = require('request-json');
+var client = request.createClient(api_host);
 //var async = require("async");
 var Promise = require('promise');
  
 
 var exports = module.exports = {
-    
+   
+  dataset: function (name, display) {
+      return exports.dataset_promise(name, display)
+        //.then(exports.parseResult)
+        //.then(null, this.retryErrors)
+        //.nodeify(callback)
+        .then(function(d){ 
+          //console.log(d);
+          return d;
+        });
+  },    
   /**
   * Escape special characters in the given string of html.
   *
@@ -17,7 +27,7 @@ var exports = module.exports = {
   * @return {String}
   */
   dataset_nodeify: function (name, display, callback) {
-      return exports.dataset(name, display)
+      return exports.dataset_promise(name, display)
         //.then(exports.parseResult)
         //.then(null, this.retryErrors)
         .nodeify(callback)
@@ -31,21 +41,21 @@ var exports = module.exports = {
       
   },    
     
-  dataset: function(name, display) {      
+  dataset_promise: function(name, display) {      
      if(display && display != ''){
-          url = api_host + 'siteitem/' + name + '/get_by_dataset?site=' + site_id + '&display=' + display;
+          url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id + '&display=' + display;
      } else {
-          url = api_host + 'siteitem/' + name + '/get_by_dataset?site=' + site_id;		
+          url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id;		
      }
      
      var promise = new Promise(function (resolve, reject) {
-      get(api_host, function (err, res) {
+      client.get(url, function (err, res) {
         if (err) reject(err);
         else resolve(res);
       });
     });
     
-    return promise;
+    return Promise.resolve(promise);
     //promise.then(this.onFulfilled, this.onRejected);
       
   },

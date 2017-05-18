@@ -4,6 +4,7 @@ var should = require('chai').should(),
     escape = monqcle_api.escape,
     unescape = monqcle_api.unescape,
     dataset = monqcle_api.dataset,
+    dataset_promise = monqcle_api.dataset_promise,
     dataset_nodeify = monqcle_api.dataset_nodeify;
 
 //describe('#dataset', function() {
@@ -18,21 +19,40 @@ var should = require('chai').should(),
 //  });
 //});
 
-//dataset_nodeify
-describe('#dataset_nodeify', function() {
-  it('prints dataset info using nodeify of promise', function() {
-      //dataset("biosimilars-laws","").should.equal('<p>Dataset</p>');
-      dataset_nodeify("biosimilars-laws","", function(dataset_info){
-      
-          //console.log(dataset_info);
-          expect(dataset_info).to.not.be.undefined;
-          expect(dataset_info).to.not.be.null;
-          expect(dataset_info).to.have.all.keys(['id', 'previews']);
-          dataset_info['id'].should.equal("56f924f0d6c9e7cf2f422eb4");
-      });
-      
+describe('Dataset', function() {
+  describe('#dataset', function() {
+    this.timeout(10000);
+    it('should return dataset without error', function(done) {
+      var ds = dataset("biosimilars-laws","");
+      ds.then(function(){ done() });
+    });
   });
+    
+  describe('#dataset_promise', function() {
+    this.timeout(10000);
+    it('should return dataset without error', function(done) {
+      var ds = dataset_promise("biosimilars-laws","");
+      ds.then(function(){ done() });
+    });
+  });
+   
+  describe('#dataset_nodeify', function() {
+      it('prints dataset info using nodeify of promise', function() {
+          //dataset("biosimilars-laws","").should.equal('<p>Dataset</p>');
+          dataset_nodeify("biosimilars-laws","", function(dataset_info){
+
+              //console.log(dataset_info);
+              expect(dataset_info).to.not.be.undefined;
+              expect(dataset_info).to.not.be.null;
+              expect(dataset_info).to.have.all.keys(['id', 'previews']);
+              dataset_info['id'].should.equal("56f924f0d6c9e7cf2f422eb4");
+          });
+
+      });
+    });
+    
 });
+
 
 
 //describe('#escape', function() {
