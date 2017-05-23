@@ -75,10 +75,13 @@ var exports = module.exports = {
       }
     },
     
-    query: function (name, config, params, callback) {
+    query: function (name, config, params, version, callback) {
       
+        if(typeof version == 'undefined' || version == ''){
+            version = "v3.0";
+        }
         //is_legacy, state, jurisdictions, start_year, end_year
-        url = "api/v3.0/dataset/query/" + name + "?site_key=" + site_id;
+        url = "api/" + version + "/dataset/query/" + name + "?site_key=" + site_id;
         if ("use_lawatlas" in config) {
             url= url + '&use_lawatlas=true';
         } 
