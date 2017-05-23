@@ -1,5 +1,14 @@
 var fs = require('fs');
-var config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+var config;
+try {
+    config = JSON.parse(fs.readFileSync('config.json', 'utf8'));
+} catch (err) {
+    if (err.code === 'ENOENT') {
+      console.error('File not found!  You must add config.json to the root of this project.');
+    } else {
+      throw err;
+    }
+}
 var api_host = config.host;
 var site_id = config.site;
 var _ = require('lodash');
