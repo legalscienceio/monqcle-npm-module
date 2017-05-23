@@ -4,25 +4,23 @@ MonQcle API for Nodejs
 MonQcle NPM module for usage of MonQcle API with Nodejs
 
 ## Installation
-
-  npm install monqcle-api --save
-
+~~~~
+  npm install https://github.com/legalscienceio/monqcle-npm-module.git --save
+~~~~
 ## Usage
-
+~~~~
   var monqcle_api = require('monqcle-api')
-      escape = monqcle_api.escape,
-      unescape = monqcle_api.unescape;
+      dataset = monqcle_api.dataset,
+      query = monqcle_api.query;
 
-  var html = '<h1>Hello World</h1>',
-      escaped = escape(html),
-      unescaped = unescape(escaped);
+  var ds = dataset("biosimilars-laws","");
+      ds.then(function(){ done() });
 
-  console.log('html', html, 'escaped', escaped, 'unescaped', unescaped);
-
+~~~~
 ## Tests
-
+~~~~
   npm test
-
+~~~~
 ## Contributing
 
 In lieu of a formal styleguide, take care to maintain the existing coding style.
