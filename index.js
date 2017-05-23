@@ -9,18 +9,18 @@ var client = request.createClient(api_host);
 var Promise = require('promise');
  
 
-var exports = module.exports = {
+var MonqcleApi = module.exports = {
    
     assets: function (callback) {
       
       url = 'site/' + site_id + '/zget';
       if(typeof callback != 'undefined'){
-        return Promise.resolve(exports.get_promise(url))
+        return Promise.resolve(MonqcleApi.get_promise(url))
         .nodeify(callback);
       } else {
-          return exports.get_promise(url)
-          //return exports.dataset_promise(name, display)
-            //.then(exports.parseResult)
+          return MonqcleApi.get_promise(url)
+          //return MonqcleApi.dataset_promise(name, display)
+            //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
             //.nodeify(callback)
             .then(function(d){ 
@@ -37,12 +37,12 @@ var exports = module.exports = {
           url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id;		
       }
       if(typeof callback != 'undefined'){
-        return Promise.resolve(exports.get_promise(url))
+        return Promise.resolve(MonqcleApi.get_promise(url))
         .nodeify(callback);
       } else {
-          return exports.get_promise(url)
-          //return exports.dataset_promise(name, display)
-            //.then(exports.parseResult)
+          return MonqcleApi.get_promise(url)
+          //return MonqcleApi.dataset_promise(name, display)
+            //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
             //.nodeify(callback)
             .then(function(d){ 
@@ -60,12 +60,12 @@ var exports = module.exports = {
           url= 'api/v3.0/questions/' + name;	
       }
       if(typeof callback != 'undefined'){
-        return Promise.resolve(exports.get_promise(url))
+        return Promise.resolve(MonqcleApi.get_promise(url))
         .nodeify(callback);
       } else {
-          return exports.get_promise(url)
-          //return exports.dataset_promise(name, display)
-            //.then(exports.parseResult)
+          return MonqcleApi.get_promise(url)
+          //return MonqcleApi.dataset_promise(name, display)
+            //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
             //.nodeify(callback)
             .then(function(d){ 
@@ -100,10 +100,10 @@ var exports = module.exports = {
         
       
         if(typeof callback != 'undefined'){
-            return Promise.resolve(exports.get_promise(url, params, "post"))
+            return Promise.resolve(MonqcleApi.get_promise(url, params, "post"))
             .nodeify(callback);
         } else {
-            return exports.get_promise(url, params, "post")
+            return MonqcleApi.get_promise(url, params, "post")
             .then(function(d){ 
               return d;
             });
@@ -122,10 +122,10 @@ var exports = module.exports = {
         //console.log("Form URL");
         //console.log(url);
         if(typeof callback != 'undefined'){
-            return Promise.resolve(exports.get_promise(url))
+            return Promise.resolve(MonqcleApi.get_promise(url))
             .nodeify(callback);
         } else {
-            return exports.get_promise(url)
+            return MonqcleApi.get_promise(url)
             .then(function(d){ 
               return d;
             });
@@ -136,12 +136,12 @@ var exports = module.exports = {
       
       url = 'previewer/' + display_id + '/get?dataset=' + name + '&preview_id=' + preview_id;
       if(typeof callback != 'undefined'){
-        return Promise.resolve(exports.get_promise(url))
+        return Promise.resolve(MonqcleApi.get_promise(url))
         .nodeify(callback);
       } else {
-          return exports.get_promise(url)
-          //return exports.dataset_promise(name, display)
-            //.then(exports.parseResult)
+          return MonqcleApi.get_promise(url)
+          //return MonqcleApi.dataset_promise(name, display)
+            //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
             //.nodeify(callback)
             .then(function(d){ 
@@ -154,10 +154,10 @@ var exports = module.exports = {
     law: function (name, id, callback) {
         url = 'lawGiver/' + name + '/' + id;
         if(typeof callback != 'undefined'){
-            return Promise.resolve(exports.get_promise(url, {}, "post"))
+            return Promise.resolve(MonqcleApi.get_promise(url, {}, "post"))
             .nodeify(callback);
         } else {
-            return exports.get_promise(url, {}, "post")
+            return MonqcleApi.get_promise(url, {}, "post")
             .then(function(d){ 
               return d;
             });
@@ -167,12 +167,12 @@ var exports = module.exports = {
     jurisdiction: function (id, callback) {
       url = 'jurisdiction/getOne?id=' + id;
       if(typeof callback != 'undefined'){
-        return Promise.resolve(exports.get_promise(url))
+        return Promise.resolve(MonqcleApi.get_promise(url))
         .nodeify(callback);
       } else {
-          return exports.get_promise(url)
-          //return exports.dataset_promise(name, display)
-            //.then(exports.parseResult)
+          return MonqcleApi.get_promise(url)
+          //return MonqcleApi.dataset_promise(name, display)
+            //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
             //.nodeify(callback)
             .then(function(d){ 
@@ -190,12 +190,12 @@ var exports = module.exports = {
         }
       
       if(typeof callback != 'undefined'){
-        return Promise.resolve(exports.get_promise(url))
+        return Promise.resolve(MonqcleApi.get_promise(url))
         .nodeify(callback);
       } else {
-          return exports.get_promise(url)
-          //return exports.dataset_promise(name, display)
-            //.then(exports.parseResult)
+          return MonqcleApi.get_promise(url)
+          //return MonqcleApi.dataset_promise(name, display)
+            //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
             //.nodeify(callback)
             .then(function(d){ 
@@ -208,12 +208,12 @@ var exports = module.exports = {
     page: function (name, callback) {
       url = 'page/' + name + '/slug';
       if(typeof callback != 'undefined'){
-        return Promise.resolve(exports.get_promise(url))
+        return Promise.resolve(MonqcleApi.get_promise(url))
         .nodeify(callback);
       } else {
-          return exports.get_promise(url)
-          //return exports.dataset_promise(name, display)
-            //.then(exports.parseResult)
+          return MonqcleApi.get_promise(url)
+          //return MonqcleApi.dataset_promise(name, display)
+            //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
             //.nodeify(callback)
             .then(function(d){ 
@@ -226,12 +226,12 @@ var exports = module.exports = {
     taxonomies: function (root, callback) {
       url = 'taxonomy/' + root + '/50status/items';
       if(typeof callback != 'undefined'){
-        return Promise.resolve(exports.get_promise(url))
+        return Promise.resolve(MonqcleApi.get_promise(url))
         .nodeify(callback);
       } else {
-          return exports.get_promise(url)
-          //return exports.dataset_promise(name, display)
-            //.then(exports.parseResult)
+          return MonqcleApi.get_promise(url)
+          //return MonqcleApi.dataset_promise(name, display)
+            //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
             //.nodeify(callback)
             .then(function(d){ 
@@ -244,12 +244,12 @@ var exports = module.exports = {
     taxonomy: function (id, callback) {
       url = 'taxonomy/' + id + '/get';
       if(typeof callback != 'undefined'){
-        return Promise.resolve(exports.get_promise(url))
+        return Promise.resolve(MonqcleApi.get_promise(url))
         .nodeify(callback);
       } else {
-          return exports.get_promise(url)
-          //return exports.dataset_promise(name, display)
-            //.then(exports.parseResult)
+          return MonqcleApi.get_promise(url)
+          //return MonqcleApi.dataset_promise(name, display)
+            //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
             //.nodeify(callback)
             .then(function(d){ 
@@ -262,12 +262,12 @@ var exports = module.exports = {
     related: function (name, callback) {
       url = 'taxonomy/' + name + '/related';
       if(typeof callback != 'undefined'){
-        return Promise.resolve(exports.get_promise(url))
+        return Promise.resolve(MonqcleApi.get_promise(url))
         .nodeify(callback);
       } else {
-          return exports.get_promise(url)
-          //return exports.dataset_promise(name, display)
-            //.then(exports.parseResult)
+          return MonqcleApi.get_promise(url)
+          //return MonqcleApi.dataset_promise(name, display)
+            //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
             //.nodeify(callback)
             .then(function(d){ 
