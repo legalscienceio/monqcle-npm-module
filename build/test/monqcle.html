@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>title</title>
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+      <script src="../monqcle-api.js"></script>
+  </head>
+  <body>
+  <h1>MonQcle API | Test Page</h1>
+      <div id="test_results"></div>
+      
+      
+      <script>
+      
+          console.log(MonqcleApi);
+          
+          $(document).ready(function(){
+              
+                var a = MonqcleApi.assets();
+                a.then(function(stuff){ 
+
+                    console.log(stuff);
+
+                });
+              });
+      
+      </script>
+  </body>
+</html>
