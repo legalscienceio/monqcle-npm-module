@@ -47,3 +47,5 @@ Add unit tests for any new or changed functionality. Lint and test your code.
 ## Release History
 
 * 1.0.0 Initial release
+* 1.0.1 Added additional functions
+* 1.0.0 Rewrote as prototype, client file included
