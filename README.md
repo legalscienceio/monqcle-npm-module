@@ -9,7 +9,8 @@ MonQcle NPM module for usage of MonQcle API with Nodejs
 ~~~~
 ## Usage
 ~~~~
-  var monqcle_api = require('monqcle-api')
+  var MonqcleApi = require('monqcle-api'),
+      monqcle_api = new MonqcleApi()
       dataset = monqcle_api.dataset,
       query = monqcle_api.query;
 
