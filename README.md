@@ -17,6 +17,23 @@ MonQcle NPM module for usage of MonQcle API with Nodejs
       ds.then(function(){ done() });
 
 ~~~~
+
+or in the browser, include the built file.
+
+~~~
+<script src="monqcle-api.js"></script>
+~~~
+
+and instantiate the class for use.
+
+~~~
+var m_api = new monqcleApi();
+var a = m_api.assets();
+a.then(function(stuff){ 
+    console.log(stuff);
+});
+~~~
+
 ## Tests
 ~~~~
   npm test
