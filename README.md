@@ -1,7 +1,7 @@
-MonQcle API for Nodejs
+MonQcle API SDK
 =========
 
-MonQcle NPM module for usage of MonQcle API with Nodejs
+MonQcle NPM module for usage of MonQcle API with Nodejs and in the browser
 
 ## Installation
 ~~~~
