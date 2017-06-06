@@ -5,7 +5,7 @@ MonQcle NPM module for usage of MonQcle API with Nodejs
 
 ## Installation
 ~~~~
-  npm install https://github.com/legalscienceio/monqcle-npm-module.git#1.0.1 --save
+  npm install https://github.com/legalscienceio/monqcle-npm-module.git#1.0.2 --save
 ~~~~
 ## Usage
 ~~~~
