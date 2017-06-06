@@ -10,14 +10,11 @@
   <h1>MonQcle API | Test Page</h1>
       <div id="test_results"></div>
       
-      
       <script>
       
-          console.log(MonqcleApi);
-          
           $(document).ready(function(){
-              
-                var a = MonqcleApi.assets();
+                var m_api = new MonqcleApi();
+                var a = m_api.assets();
                 a.then(function(stuff){ 
 
                     console.log(stuff);
