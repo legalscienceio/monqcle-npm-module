@@ -18,16 +18,24 @@ var client = request.createClient(api_host);
 var Promise = require('promise');
  
 
-var MonqcleApi = module.exports = {
+(function() {
+
+ var MonqcleApi = (function() {
    
-    assets: function (callback) {
+    var MonqcleApi = function(options) {
+      //console.log("MonqcleApi constructor");
+    };
+    
+    MonqcleApi.prototype.assets = function assets(callback) {
       
       url = 'site/' + site_id + '/zget';
+      var mapi = new MonqcleApi({});
+          
       if(typeof callback != 'undefined'){
-        return Promise.resolve(MonqcleApi.get_promise(url))
+        return Promise.resolve(mapi.get_promise(url))
         .nodeify(callback);
       } else {
-          return MonqcleApi.get_promise(url)
+          return mapi.get_promise(url)
           //return MonqcleApi.dataset_promise(name, display)
             //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
@@ -37,19 +45,22 @@ var MonqcleApi = module.exports = {
               return d;
             });
       }
-    },
-    dataset: function (name, display, callback) {
+    };
+    
+    MonqcleApi.prototype.dataset = function dataset(name, display, callback) {
       
       if(display && display != ''){
           url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id + '&display=' + display;
       } else {
           url = 'siteitem/' + name + '/get_by_dataset?site=' + site_id;		
       }
+      var mapi = new MonqcleApi({});           
+          
       if(typeof callback != 'undefined'){
-        return Promise.resolve(MonqcleApi.get_promise(url))
+        return Promise.resolve(mapi.get_promise(url))
         .nodeify(callback);
       } else {
-          return MonqcleApi.get_promise(url)
+          return mapi.get_promise(url)
           //return MonqcleApi.dataset_promise(name, display)
             //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
@@ -59,20 +70,22 @@ var MonqcleApi = module.exports = {
               return d;
             });
       }
-    },
+    };
     
-    questions: function (name, is_legacy, callback) {
+    MonqcleApi.prototype.questions = function questions(name, is_legacy, callback) {
       
       if(is_legacy && is_legacy != '' && (is_legacy == true || is_legacy == "true" )){
           url = 'questions/' + name + '?use_lawatlas=true';
       } else {
           url= 'api/v3.0/questions/' + name;	
       }
+      var mapi = new MonqcleApi({});
+          
       if(typeof callback != 'undefined'){
-        return Promise.resolve(MonqcleApi.get_promise(url))
+        return Promise.resolve(mapi.get_promise(url))
         .nodeify(callback);
       } else {
-          return MonqcleApi.get_promise(url)
+          return mapi.get_promise(url)
           //return MonqcleApi.dataset_promise(name, display)
             //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
@@ -82,10 +95,11 @@ var MonqcleApi = module.exports = {
               return d;
             });
       }
-    },
+    };
     
-    query: function (name, config, params, version, callback) {
-      
+    MonqcleApi.prototype.query = function query(name, config, params, version, callback) {
+        var mapi = new MonqcleApi({});
+        
         if(typeof version == 'undefined' || version == ''){
             version = "v3.0";
         }
@@ -109,17 +123,17 @@ var MonqcleApi = module.exports = {
         
       
         if(typeof callback != 'undefined'){
-            return Promise.resolve(MonqcleApi.get_promise(url, params, "post"))
+            return Promise.resolve(mapi.get_promise(url, params, "post"))
             .nodeify(callback);
         } else {
-            return MonqcleApi.get_promise(url, params, "post")
+            return mapi.get_promise(url, params, "post")
             .then(function(d){ 
               return d;
             });
         }
-    },
+    };
     
-    query_form: function (name, id, is_legacy, is_migrated, callback) {
+    MonqcleApi.prototype.query_form = function query_form(name, id, is_legacy, is_migrated, callback) {
       
         url = "api/v2.0/query/form/" + name + "/" + id + "?site_key=" + site_id;
         if(is_legacy && is_legacy != '' && (is_legacy == true || is_legacy == "true" )){
@@ -130,25 +144,29 @@ var MonqcleApi = module.exports = {
         }
         //console.log("Form URL");
         //console.log(url);
+        var mapi = new MonqcleApi({});
         if(typeof callback != 'undefined'){
-            return Promise.resolve(MonqcleApi.get_promise(url))
+            return Promise.resolve(mapi.get_promise(url))
             .nodeify(callback);
         } else {
-            return MonqcleApi.get_promise(url)
+            
+            return mapi.get_promise(url)
             .then(function(d){ 
               return d;
             });
       }
-    },
+    };
     
-    display: function (name, display_id, preview_id, callback) {
+    MonqcleApi.prototype.display = function display(name, display_id, preview_id, callback) {
       
       url = 'previewer/' + display_id + '/get?dataset=' + name + '&preview_id=' + preview_id;
+      var mapi = new MonqcleApi({});
       if(typeof callback != 'undefined'){
-        return Promise.resolve(MonqcleApi.get_promise(url))
+        return Promise.resolve(mapi.get_promise(url))
         .nodeify(callback);
       } else {
-          return MonqcleApi.get_promise(url)
+          
+          return mapi.get_promise(url)
           //return MonqcleApi.dataset_promise(name, display)
             //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
@@ -158,28 +176,31 @@ var MonqcleApi = module.exports = {
               return d;
             });
       }
-    },
+    };
     
-    law: function (name, id, callback) {
+    MonqcleApi.prototype.law = function law(name, id, callback) {
         url = 'lawGiver/' + name + '/' + id;
+        var mapi = new MonqcleApi({});
         if(typeof callback != 'undefined'){
-            return Promise.resolve(MonqcleApi.get_promise(url, {}, "post"))
+            return Promise.resolve(mapi.get_promise(url, {}, "post"))
             .nodeify(callback);
         } else {
-            return MonqcleApi.get_promise(url, {}, "post")
+            return mapi.get_promise(url, {}, "post")
             .then(function(d){ 
               return d;
             });
         }
-    },
+    };
     
-    jurisdiction: function (id, callback) {
+    MonqcleApi.prototype.jurisdiction = function jurisdiction(id, callback) {
       url = 'jurisdiction/getOne?id=' + id;
+      var mapi = new MonqcleApi({});
       if(typeof callback != 'undefined'){
-        return Promise.resolve(MonqcleApi.get_promise(url))
+        return Promise.resolve(mapi.get_promise(url))
         .nodeify(callback);
       } else {
-          return MonqcleApi.get_promise(url)
+          
+          return mapi.get_promise(url)
           //return MonqcleApi.dataset_promise(name, display)
             //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
@@ -189,20 +210,21 @@ var MonqcleApi = module.exports = {
               return d;
             });
       }
-    },
+    };
     
-    jurisdiction_site_items: function (show_medals, callback) {
+    MonqcleApi.prototype.jurisdiction_site_items = function jurisdiction_site_items(show_medals, callback) {
         if(show_medals){
             url = 'jurisdictionsiteitem/secondall';      
         } else {
             url = 'jurisdictionsiteitem/all';
         }
-      
+      var mapi = new MonqcleApi({});
       if(typeof callback != 'undefined'){
-        return Promise.resolve(MonqcleApi.get_promise(url))
+        return Promise.resolve(mapi.get_promise(url))
         .nodeify(callback);
       } else {
-          return MonqcleApi.get_promise(url)
+          
+          return mapi.get_promise(url)
           //return MonqcleApi.dataset_promise(name, display)
             //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
@@ -212,15 +234,16 @@ var MonqcleApi = module.exports = {
               return d;
             });
       }
-    },
+    };
     
-    page: function (name, callback) {
+    MonqcleApi.prototype.page = function page(name, callback) {
       url = 'page/' + name + '/slug';
+      var mapi = new MonqcleApi({});
       if(typeof callback != 'undefined'){
-        return Promise.resolve(MonqcleApi.get_promise(url))
+        return Promise.resolve(mapi.get_promise(url))
         .nodeify(callback);
       } else {
-          return MonqcleApi.get_promise(url)
+          return mapi.get_promise(url)
           //return MonqcleApi.dataset_promise(name, display)
             //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
@@ -230,15 +253,16 @@ var MonqcleApi = module.exports = {
               return d;
             });
       }
-    },
+    };
     
-    taxonomies: function (root, callback) {
+    MonqcleApi.prototype.taxonomies = function taxonomies(root, callback) {
       url = 'taxonomy/' + root + '/50status/items';
+      var mapi = new MonqcleApi({});
       if(typeof callback != 'undefined'){
-        return Promise.resolve(MonqcleApi.get_promise(url))
+        return Promise.resolve(mapi.get_promise(url))
         .nodeify(callback);
       } else {
-          return MonqcleApi.get_promise(url)
+          return mapi.get_promise(url)
           //return MonqcleApi.dataset_promise(name, display)
             //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
@@ -248,15 +272,17 @@ var MonqcleApi = module.exports = {
               return d;
             });
       }
-    },
+    };
     
-    taxonomy: function (id, callback) {
+    MonqcleApi.prototype.taxonomy = function taxonomy(id, callback) {
       url = 'taxonomy/' + id + '/get';
+      var mapi = new MonqcleApi({});
       if(typeof callback != 'undefined'){
-        return Promise.resolve(MonqcleApi.get_promise(url))
+        return Promise.resolve(mapi.get_promise(url))
         .nodeify(callback);
       } else {
-          return MonqcleApi.get_promise(url)
+          
+          return mapi.get_promise(url)
           //return MonqcleApi.dataset_promise(name, display)
             //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
@@ -266,15 +292,17 @@ var MonqcleApi = module.exports = {
               return d;
             });
       }
-    },
+    };
   
-    related: function (name, callback) {
+    MonqcleApi.prototype.related = function related(name, callback) {
       url = 'taxonomy/' + name + '/related';
+      var mapi = new MonqcleApi({});
       if(typeof callback != 'undefined'){
-        return Promise.resolve(MonqcleApi.get_promise(url))
+        return Promise.resolve(mapi.get_promise(url))
         .nodeify(callback);
       } else {
-          return MonqcleApi.get_promise(url)
+          
+          return mapi.get_promise(url)
           //return MonqcleApi.dataset_promise(name, display)
             //.then(MonqcleApi.parseResult)
             //.then(null, this.retryErrors)
@@ -284,11 +312,11 @@ var MonqcleApi = module.exports = {
               return d;
             });
       }
-    },
+    };
     
     
     //Common functions
-    get_promise: function(url, params, method) {
+    MonqcleApi.prototype.get_promise = function get_promise(url, params, method) {
         if(typeof params == 'undefined' || params == null){
             params = {};
         }
@@ -313,16 +341,36 @@ var MonqcleApi = module.exports = {
      
     return Promise.resolve(promise);
       
-    },
-    onFulfilled: function(result) {
+    };
+    
+    MonqcleApi.prototype.onFulfilled = function onFulfilled(result) {
       //console.log("Promise resolved");
       //console.log(result);
       return result;
-    },
-    onRejected: function(result) {
+    };
+    
+    MonqcleApi.prototype.onRejected = function onRejected(result) {
       console.error("Promise rejected");
       console.error(result);
       return null;
+    };
+    
+    
+    return MonqcleApi;
+})();
+    
+  if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = MonqcleApi;
+  }
+  else {
+    if (typeof define === 'function' && define.amd) {
+      define([], function() {
+        return MonqcleApi;
+      });
     }
-};
+    else {
+      window.MonqcleApi = MonqcleApi;
+    }
+  }
 
+})();

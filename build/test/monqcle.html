@@ -8,19 +8,30 @@
   </head>
   <body>
   <h1>MonQcle API | Test Page</h1>
-      <div id="test_results"></div>
-      
+      <ul id="test_results"></ul>
       
       <script>
       
-          console.log(MonqcleApi);
-          
           $(document).ready(function(){
-              
-                var a = MonqcleApi.assets();
+                console.log("MonqcleApi");
+                console.log(monqcleApi);
+                
+                var m_api = new monqcleApi();
+                var a = m_api.assets();
                 a.then(function(stuff){ 
 
                     console.log(stuff);
+                    
+                    site_item = JSON.parse(stuff.body);
+                    
+                    
+                    
+                    console.log(site_item);
+                    
+                    
+                    $.each(site_item.site_items, function( index, value ) {
+                      $("#test_results").append( "<li>" + index + ": " + value.title + "</li>" );
+                    });
 
                 });
               });

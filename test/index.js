@@ -1,6 +1,7 @@
 var should = require('chai').should(),
     expect = require('chai').expect,
-    monqcle_api = require('../index'),
+    MonqcleApi = require('../index'),
+    monqcle_api = new MonqcleApi(),
     assets = monqcle_api.assets,
     page = monqcle_api.page,
     taxonomies = monqcle_api.taxonomies,
