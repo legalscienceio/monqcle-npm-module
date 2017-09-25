@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>title</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+    <script src="../monqcle-api.js"></script>
+    
+    
+    <link href="jsoneditor/dist/jsoneditor.min.css" rel="stylesheet" type="text/css">
+    <script src="jsoneditor/dist/jsoneditor.min.js"></script>
+</head>
+
+<body>
+    <h1>MonQcle API | Test Page</h1>
+    <ul id="test_results"></ul>
+
+    <pre id="json"></pre>
+    
+    <div id="jsoneditor" style="width: 100%; height: 700px;"></div>
+    
+    <script>
+        /*                                                                                                                                                              
+            This coding interview contains two tasks: 
+
+            1) Sort objects get from MonqcleApi: 
+            In this task, you are asked to rewrite the following code to sort the 
+            object array site_item.site_items in ascending alphabetical order by 
+            their property, "title". And display them in the browser. 
+
+            Example Output is, by sorting the title examples "news august 2016 citations", 
+            "40 Cities: Complete Streets" and "Naloxone Laws: Critical Elements of Effective 
+            State Legislation", your output will be a list as the following:
+
+                1 | 40 Cities: Complete Streets
+                2 | Naloxone Laws: Critical Elements of Effective State Legislation
+                3 | news august 2016 citations
+
+            2) Filter the texts: 
+            Implement your filter function that can find the property "pages"->"content" 
+            of siteitems and display all the "content"(s) that has the specific word "antidote" 
+            (ignore the case) in the browser.
+            
+            Good Luck! 
+            :)
+        */
+        $(document).ready(function() {
+            console.log("MonqcleApi");
+            
+            console.log(monqcleApi);
+
+            var m_api = new monqcleApi();
+            
+            var q = m_api.query("distance-education-laws-1503582796",{start_year:"2015"}, {});
+            
+            q.then(function(stuff) {
+                
+                console.log(stuff);
+                console.log(stuff.body);
+
+                //site_item = JSON.parse(stuff.body);
+
+                //console.log(site_item);
+                
+                
+                var container = document.getElementById("jsoneditor");
+                var options = {};
+                var editor = new JSONEditor(container, options);
+
+                // set json
+                editor.set(stuff.body[0]);
+
+                // get json
+                var json = editor.get();
+                
+
+//                $.each(site_item.site_items, function(index, value) {
+//                    $("#test_results").append("<li>" + index + ": " + value.title + "</li>");
+//                });
+
+                //$("#json").html(JSON.stringify(stuff.body, undefined, 2));
+
+
+            });
+        });
+       
+
+    </script>
+</body>
+
+</html>
